@@ -1,0 +1,50 @@
+﻿@model DogsSocialNetwork.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="row">
+    <div class="col-sm-12" style="text-align:center">
+        <h2>Enter</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" style="text-align:center">
+        <p class="lead">Please, log in your account:</p>
+    </div>
+</div>
+<div class="panel-body">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @*@Html.ValidationSummary()*@
+        <div class="row">
+            <div class="col-md-6 col-md-offset-4 col-sm-4 col-sm-offset-2">
+                <div class="row">
+                    <div class="col-md-3">@Html.LabelFor(model => model.UserLogin):</div>
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.UserLogin, new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.UserLogin), autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(model => model.UserLogin)
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3">@Html.LabelFor(model => model.Password):</div>
+                    <div class="col-md-5">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Password) })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12" style="text-align:center">
+                <input type="submit" value="Увійти" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>

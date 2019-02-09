@@ -1,16 +1,23 @@
-﻿using System;
+﻿using DogsSocialNetwork.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DogsSocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public HomeController()
         {
-            return View();
+        }
+
+        public ActionResult Index(User user)
+        {
+            
+            return View(user);
         }
 
         public ActionResult About()
