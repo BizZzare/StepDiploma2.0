@@ -11,9 +11,9 @@ namespace DogsSocialNetwork.Helpers
     {
         protected override void Seed(AccountContext context)
         {
-            var admin = new Role { Name = "Admin" };
-            var user = new Role { Name = "User" };
-            context.Roles.AddRange(new List<Role>{ admin, user});
+            var admin = new Role { Id = 1, Name = "Admin" };
+            var user = new Role { Id = 2, Name = "User" };
+            context.Roles.AddRange(new List<Role> { admin, user });
 
             var regLogin = new Login { Password = "regular", UserLogin = "regular" };
             var admLogin = new Login { Password = "admin", UserLogin = "admin" };

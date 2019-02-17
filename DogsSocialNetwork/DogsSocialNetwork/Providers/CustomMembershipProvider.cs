@@ -67,7 +67,7 @@ namespace DogsSocialNetwork.Providers
                         return GetUser(userName, false); // получаю MembershipUser
                     }
                 }
-                catch
+                catch 
                 {
                     return null;
                 }

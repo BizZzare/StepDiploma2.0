@@ -3,6 +3,7 @@ using DogsSocialNetwork.Models;
 using DogsSocialNetwork.Providers;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace DogsSocialNetwork.Controllers
 {
     public class AccountController : Controller
     {
+        AccountContext db = new AccountContext();
         // GET: Account
         public ActionResult Login()
         {
@@ -70,21 +72,36 @@ namespace DogsSocialNetwork.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User usr)
+        public ActionResult Register(RegistrationModel regModel)
         {
-            var provider = new CustomMembershipProvider();
-
-            var user = provider.CreateUser(usr.LastName, usr.FirstName, usr.Login.UserLogin, usr.Login.Password, 0);
-
-            if (user != null)
+            try
             {
-                return RedirectToAction("Index", "Home", usr);
+                foreach (var login in db.Logins)
+                {
+                    if (login.UserLogin == regModel.Login)
+                    {
+                        ModelState.AddModelError("", "This nickname was already taken");
+                        return View();
+                    }
+                }
+
+                var log = new Login() { UserLogin = regModel.Login, Password = regModel.Password };
+
+                db.Logins.Add(log);
+                var user = new User() { Login = log, Email = regModel.Email, FirstName = regModel.FirstName, LastName = regModel.LastName, RoleId = 2 };
+                db.Users.Add(user);
+
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home", user);
             }
-            else
+            catch (DbEntityValidationException e)
             {
-                ModelState.AddModelError("", "Something went wrong");
+                ViewBag.Error = "Something went wrong!";
             }
-            return View(usr);
+            return View();
+
+            
+            
         }
     }
 
