@@ -24,6 +24,7 @@ namespace DogsSocialNetwork.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Login(Login model, string returnUrl)
         {
+
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserLogin, model.Password))
@@ -37,7 +38,8 @@ namespace DogsSocialNetwork.Controllers
                     else
                     {
                         var currentUser = GetUser(model.UserLogin);
-                        return RedirectToAction("Index", "Home", currentUser);
+                        var user = db.Users.Where(x => x.Login.UserLogin == model.UserLogin).FirstOrDefault();
+                        return RedirectToAction("Index", "Home", new { userId = user.Id });
                     }
                 }
                 else
@@ -92,7 +94,7 @@ namespace DogsSocialNetwork.Controllers
                 db.Users.Add(user);
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home", user);
+                return RedirectToAction("Index", "Home", new { userId = user.Id });
             }
             catch (DbEntityValidationException e)
             {

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DogsSocialNetwork.Models.Pet>
+
+@{
+    ViewBag.Title = "Pets";
+}
+
+<h2>Pets</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { userId = ViewBag.UserId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Breed.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @(item.Gender ? "Male" : "Female")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { petId = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Back to Home", "Index", new { userId = ViewBag.UserId })
+

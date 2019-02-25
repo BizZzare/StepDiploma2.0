@@ -27,5 +27,12 @@ namespace DogsSocialNetwork.Models
         [ForeignKey("Role")]
         public int RoleId { get; set; }
         public Role Role { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; set; }
+
+        public User()
+        {
+            Pets = new List<Pet>();
+        }
     }
 }
