@@ -189,6 +189,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -228,6 +230,8 @@
     <Content Include="Views\Chat\ChatRoom.cshtml" />
     <Content Include="Views\Chat\History.cshtml" />
     <Content Include="Views\Home\Upload.cshtml" />
+    <Content Include="Views\Home\PairSearch.cshtml" />
+    <Content Include="Views\Home\Like.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

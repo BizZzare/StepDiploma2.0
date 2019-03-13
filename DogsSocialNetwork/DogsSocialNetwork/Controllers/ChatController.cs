@@ -30,7 +30,7 @@ namespace DogsSocialNetwork.Controllers
                     {
                         chatModel.Messages.Add(new ChatMessage()
                         {
-                            Text = user + " вошел в чат",
+                            Text = user + " joined",
                             Date = DateTime.Now
                         });
 
@@ -40,7 +40,7 @@ namespace DogsSocialNetwork.Controllers
                     }
                     else if (chatModel.Users.Count > 10)
                     {
-                        throw new Exception("Чат заполнен");
+                        throw new Exception("Chat overflow");
                     }
                     else
                     {
@@ -55,7 +55,7 @@ namespace DogsSocialNetwork.Controllers
                         // добавляем в список сообщений сообщение о новом пользователе
                         chatModel.Messages.Add(new ChatMessage()
                         {
-                            Text = user + " вошел в чат",
+                            Text = user + " joined",
                             Date = DateTime.Now
                         });
 
@@ -119,7 +119,7 @@ namespace DogsSocialNetwork.Controllers
             chatModel.Users.Remove(user);
             chatModel.Messages.Add(new ChatMessage()
             {
-                Text = user.Name + " покинул чат.",
+                Text = user.Name + " left.",
                 Date = DateTime.Now
             });
         }

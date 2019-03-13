@@ -25,12 +25,16 @@ namespace DogsSocialNetwork.Controllers
             if (userId == null)
                 return RedirectToAction("Login", "Account");
             var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
+
+            UserHelper.CurrentUserID = user.Id;
+
             return View(user);
         }
 
         [Authorize]
         public ActionResult Pets(int userId)
         {
+            UserHelper.disliked.Clear();
             var pets = db.Pets.Where(x => x.UserId == userId).Select(x => x).ToList();
             foreach (var pet in pets)
             {
@@ -155,6 +159,40 @@ namespace DogsSocialNetwork.Controllers
 
             return RedirectToAction("Pets", "Home", new { userId = curPet.UserId });
         }
-        
+
+        public ActionResult PairSearch(int petId)
+        {
+            UserHelper.CurrentPetID = petId;
+            var pet = db.Pets.Where(x => x.Id == petId).Select(x=>x).FirstOrDefault();
+            var supposedPet = db.Pets
+                .Where(x=>x.Gender == !pet.Gender)
+                .Where(x=>x.BreedId == pet.BreedId)
+                .Where(x=>!UserHelper.disliked.Contains(x.Id))
+                .Where(x=>x.UserId != pet.UserId)
+                .Select(x => x).FirstOrDefault();
+
+            supposedPet.Breed = db.Breeds.Where(x => x.BreedId == pet.BreedId).Select(x => x).FirstOrDefault();
+            return View(supposedPet);
+        }
+
+        public ActionResult Like(int petId)
+        {
+            var pet = db.Pets.Where(x => x.Id == petId).Select(x => x).FirstOrDefault();
+            var user = db.Users.Where(x=>x.Id == pet.UserId).Select(x => x).FirstOrDefault();
+
+            return View(user);
+        }
+        public ActionResult Dislike(int petId)
+        {
+            UserHelper.disliked.Add(petId);
+            return RedirectToAction("PairSearch", "Home", new { petId = UserHelper.CurrentPetID });
+        }
+
+
+            public ActionResult GetImage(string path)
+        {
+            return File(path, "image/jpg");
+        }
+
     }
 }

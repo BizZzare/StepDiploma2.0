@@ -19,7 +19,7 @@ namespace DogsSocialNetwork.Helpers
             var admLogin = new Login { Password = "admin", UserLogin = "admin" };
             context.Logins.AddRange(new List<Login> { regLogin, admLogin });
             
-            var regularUser = new User() { FirstName = "Reqular", LastName = "User", Login = regLogin, Role = user };
+            var regularUser = new User() { FirstName = "Reqular", LastName = "User", Login = regLogin, Role = user, Email = "reg@reg.com" };
             var adminUser = new User() { FirstName = "Admin", LastName = "Administrator", Login = admLogin, Role = admin };
             context.Users.AddRange(new List<User> { regularUser, adminUser });
 

@@ -11,6 +11,7 @@
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Breed.Name)
         </th>
@@ -29,6 +30,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.ActionLink("Find a pair", "PairSearch", new { petId = item.Id }) 
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Breed.Name)
             </td>

@@ -9,5 +9,7 @@ namespace DogsSocialNetwork.Helpers
     {
         public static int CurrentUserID { get; set; }
         public static int CurrentPetID { get; set; }
+
+        public static List<int> disliked = new List<int>();
     }
 }

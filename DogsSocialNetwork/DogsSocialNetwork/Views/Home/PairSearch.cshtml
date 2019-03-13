@@ -1,0 +1,44 @@
+﻿@model DogsSocialNetwork.Models.Pet
+@using DogsSocialNetwork.Helpers
+<div>
+    <h4>Pet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <img src="@Url.Action("GetImage", "Home", new { path = Model.ImagePath })" alt="@Model.Name" class="petImage" style="width: 150px; height: 150px; position: absolute; right: 250px;" />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Breed.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Breed.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Like", "Like", new { petId = Model.Id }) /
+    @Html.ActionLink("Dislike", "Dislike", new { petId = Model.Id })
+</p>
+
+<p>
+    @Html.ActionLink("Back to Home", "Index", new { userId = UserHelper.CurrentUserID })
+</p>
