@@ -1,0 +1,49 @@
+﻿@using DogsSocialNetwork.Models
+@model DogsSocialNetwork.Models.ChatModel
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Чат на Ajax и JQuery</title>
+    @Styles.Render("~/Content/Site.css")
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/chat.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+</head>
+<body>
+
+    <div id="Username" style="visibility:hidden">
+    </div>
+    <div id="LastRefresh">
+    </div>
+
+    <div id="RefreshArea">
+        @{
+            Html.RenderPartial("History", Model);
+        }
+    </div>
+
+    @Ajax.ActionLink("ActionLink", "Index", new { user = "", logOn = "", logOff = "", chatMessage = "" },
+    new AjaxOptions { UpdateTargetId = "RefreshArea", OnSuccess = "ChatOnSuccess", OnFailure = "ChatOnFailure" },
+    new { @id = "ActionLink", @style = "visibility:hidden;" })
+
+    <div id="inputForm">
+        <table>
+            <tr>
+                <td rowspan="2"><textarea id="txtMessage" rows="3"></textarea></td>
+                <td><button id="btnMessage" value="Отправить">Отправить</button></td>
+            </tr>
+            <tr>
+                <td><button id="btnLogOff" value="Выйти">Выйти</button></td>
+            </tr>
+        </table>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")s
+
+
+
+</body>
+</html>
