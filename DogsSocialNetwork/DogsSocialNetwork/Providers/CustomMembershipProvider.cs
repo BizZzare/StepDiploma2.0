@@ -32,7 +32,7 @@ namespace DogsSocialNetwork.Providers
                         isValid = true;
                     }
                 }
-                catch
+                catch (Exception e)
                 {
                     isValid = false;
                 }

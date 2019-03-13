@@ -1,0 +1,19 @@
+﻿@model DogsSocialNetwork.Models.Pet
+
+@{
+    ViewBag.CurrentPet = Model;
+}
+
+@using (Html.BeginForm("Upload", "Home", new { curPet = Model }, FormMethod.Post,
+             new { enctype = "multipart/form-data" }))
+{
+
+
+
+    <div>
+
+        Select a file: <input type="file" name="fileUpload" />
+
+        <input type="submit" value="Upload" />
+    </div>
+}

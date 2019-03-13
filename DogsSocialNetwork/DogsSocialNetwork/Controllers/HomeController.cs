@@ -2,6 +2,8 @@
 using DogsSocialNetwork.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,7 +31,7 @@ namespace DogsSocialNetwork.Controllers
         [Authorize]
         public ActionResult Pets(int userId)
         {
-            var pets = db.Pets.Where(x => x.UserId == userId).Select(x=>x).ToList();
+            var pets = db.Pets.Where(x => x.UserId == userId).Select(x => x).ToList();
             foreach (var pet in pets)
             {
                 pet.Breed = db.Breeds.Where(x => x.BreedId == pet.BreedId).Select(x => x).FirstOrDefault();
@@ -96,7 +98,7 @@ namespace DogsSocialNetwork.Controllers
         private List<SelectListItem> GetBreedsList()
         {
             var res = new List<SelectListItem>();
-            foreach (var breed in db.Breeds.Select(x=>x).ToList())
+            foreach (var breed in db.Breeds.Select(x => x).ToList())
             {
                 res.Add(new SelectListItem()
                 {
@@ -113,12 +115,46 @@ namespace DogsSocialNetwork.Controllers
 
             return View();
         }
-        
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+
+        public ActionResult Upload(int petId)
+        {
+            UserHelper.CurrentPetID = petId;
+            var pet = db.Pets.Where(x => x.Id == petId).Select(x => x).FirstOrDefault();
+            
+            return View(pet);
+        }
+
+        [HttpPost]
+        public ActionResult Upload()  //Here just store 'Image' in a folder in Project Directory 
+                                      //  name 'UplodedFiles'
+        {
+            Pet curPet = db.Pets.Where(x => x.Id == UserHelper.CurrentPetID).FirstOrDefault();
+            foreach (string file in Request.Files)
+            {
+                var postedFile = Request.Files[file];
+
+                var filePath = Server.MapPath("~/UploadedFiles/") + Path.GetFileName(postedFile.FileName);
+
+                postedFile.SaveAs(filePath);
+
+                var res = db.Pets.Where(x => x.Id == curPet.Id).FirstOrDefault();
+                
+                if (res != null)
+                {
+                    res.ImagePath = filePath;
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Pets", "Home", new { userId = curPet.UserId });
+        }
+        
     }
 }

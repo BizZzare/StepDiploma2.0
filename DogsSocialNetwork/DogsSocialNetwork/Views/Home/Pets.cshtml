@@ -42,6 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
+                @Html.ActionLink("Set picture", "Upload", new { petId = item.Id }) |
                 @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { petId = item.Id })
             </td>

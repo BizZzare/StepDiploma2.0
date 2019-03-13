@@ -6,8 +6,13 @@
 
 <h2>Index</h2>
 
+<div class="col-md-10">
+    Hello @Model.FirstName @Model.LastName!
+</div>
+<div class="col-md-10">
+    @Html.ActionLink("Pets", "Pets", new { userId = Model.Id })
+</div>
 
-Hello @Model.FirstName @Model.LastName!
-
-@Html.ActionLink("Pets", "Pets", new { userId = Model.Id })
-@Html.ActionLink("Chat", "Index", "Chat", new { user = $"{Model.FirstName} {Model.LastName}", logOn = true }, null)
+<div class="col-md-10">
+    @Html.ActionLink("Chat", "Index", "Chat", new { user = $"{Model.FirstName} {Model.LastName}", logOn = true }, null)
+</div>
