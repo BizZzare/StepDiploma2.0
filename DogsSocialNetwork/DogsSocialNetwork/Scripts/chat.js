@@ -47,7 +47,7 @@ function LoginOnSuccess(result) {
         href = href + "&logOff=true";
         $("#ActionLink").attr("href", href).click();
 
-        document.location = "Home/Index";
+        document.location = "GetBack";
     });
 }
 
