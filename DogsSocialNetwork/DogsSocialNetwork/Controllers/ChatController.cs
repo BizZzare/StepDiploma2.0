@@ -1,4 +1,5 @@
-﻿using DogsSocialNetwork.Models;
+﻿using DogsSocialNetwork.Helpers;
+using DogsSocialNetwork.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,5 +133,9 @@ namespace DogsSocialNetwork.Controllers
             return UserCookie;
         }
 
+        public ActionResult GetBack()
+        {
+            return RedirectToAction("Index", "Home", new { userId = UserHelper.CurrentUserID });
+        }
     }
 }
