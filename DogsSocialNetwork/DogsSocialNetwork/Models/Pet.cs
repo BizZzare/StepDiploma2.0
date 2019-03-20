@@ -15,19 +15,27 @@ namespace DogsSocialNetwork.Models
         public string Name { get; set; }
 
         [Required]
-        public bool Gender { get; set; }
+        [ForeignKey("Gender")]
+        public int GenderId { get; set; }
+        public Gender Gender { get; set; }
 
         [Required]
         public int Age { get; set; }
 
+        [Display(Name = "Breed")]
         [ForeignKey("Breed")]
         public int BreedId { get; set; }
         public Breed Breed { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public User User { get; set; }
+        
+        [ForeignKey("Ancestry")]
+        public int? AncestryId { get; set; }
+        public Ancestry Ancestry { get; set; }
 
+        [Display(Name = "Attach Image")]
         public string ImagePath { get; set; }
     }
 }

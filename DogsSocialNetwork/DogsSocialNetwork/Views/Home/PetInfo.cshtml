@@ -1,5 +1,5 @@
 ﻿@model DogsSocialNetwork.Models.Pet
-@using DogsSocialNetwork.Helpers
+
 <div>
     <h4>@Model.Name</h4>
     <hr />
@@ -33,7 +33,14 @@
             @Html.DisplayFor(model => model.Age)
         </dd>
 
-       
+        <dt>
+            Owner
+        </dt>
+
+        <dd>
+            @Model.User.FirstName @Model.User.LastName
+        </dd>
+
 
         @if (Model.AncestryId != null)
         {
@@ -50,10 +57,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Like", "Like", new { petId = Model.Id }) /
-    @Html.ActionLink("Dislike", "Dislike", new { petId = Model.Id })
-</p>
-
-<p>
-    @Html.ActionLink("Back to Home", "Index", new { userId = UserHelper.CurrentUserID })
+    <a href='javascript:history.go(-1)'>Back</a>
 </p>

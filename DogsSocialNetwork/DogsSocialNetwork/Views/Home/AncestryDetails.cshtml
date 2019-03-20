@@ -1,0 +1,71 @@
+﻿@model DogsSocialNetwork.Models.Ancestry
+
+<div>
+    <h4>Ancestry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherId)
+        </dt>
+        <dd>
+            @if (Model.Father != null)
+            {
+                @Html.DisplayFor(model => model.Father.Name)
+                <div>
+                    @Html.ActionLink("More detailed info", "PetInfo", new { petId = Model.FatherId })
+                </div>
+            }
+            else
+            {
+                <div>
+                    No info
+                </div>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherId)
+        </dt>
+
+        <dd>
+            @if (Model.Mother != null)
+            {
+                @Html.DisplayFor(model => model.Mother.Name)
+                <div>
+                    @Html.ActionLink("More detailed info", "PetInfo", new { petId = Model.MotherId })
+                </div>
+            }
+            else
+            {
+                <div>
+                    No info
+                </div>
+            }
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+
+            @if (!String.IsNullOrEmpty(Model.DocumentPath))
+            {
+                <a href="@Url.Action("GetDocument", "Home", new { path = Model.DocumentPath })" target="_blank">Document</a>
+            }
+            else
+            {
+                <div>
+                    No document provided
+                </div>
+            }
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href='javascript:history.go(-1)'>Back</a>
+</p>

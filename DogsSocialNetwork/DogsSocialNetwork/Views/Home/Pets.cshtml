@@ -4,13 +4,16 @@
     ViewBag.Title = "Pets";
 }
 
+@Scripts.Render("~/Scripts/ManagementScripts.js")
+
 <h2>Pets</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { userId = ViewBag.UserId })
+    @Html.ActionLink("Add New", "Create", new { userId = ViewBag.UserId })
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Breed.Name)
@@ -29,28 +32,31 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink("Find a pair", "PairSearch", new { petId = item.Id }) 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Breed.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @(item.Gender ? "Male" : "Female")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.ActionLink("Set picture", "Upload", new { petId = item.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { petId = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Find a pair", "PairSearch", new { petId = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Ancestry", "Ancestry", new { petId = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Breed.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.ActionLink("Set picture", "Upload", new { petId = item.Id }) |
+            @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { petId = item.Id }, new { @class = "btnDelete" })
+        </td>
+    </tr>
     }
 
 </table>
