@@ -184,8 +184,13 @@ namespace DogsSocialNetwork.Controllers
                 .Where(x => !UserHelper.disliked.Contains(x.Id))
                 .Where(x => x.UserId != pet.UserId)
                 .Select(x => x).FirstOrDefault();
+            
+            if (supposedPet == null)
+                return RedirectToAction("Pets", new { userId = UserHelper.CurrentUserID });
 
-            supposedPet.Breed = db.Breeds.Where(x => x.BreedId == pet.BreedId).Select(x => x).FirstOrDefault();
+            supposedPet.Breed = db.Breeds.Where(x => x.BreedId == pet.BreedId).FirstOrDefault();
+
+
             return View(supposedPet);
         }
 
