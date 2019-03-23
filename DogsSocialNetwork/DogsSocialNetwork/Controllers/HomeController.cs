@@ -26,6 +26,8 @@ namespace DogsSocialNetwork.Controllers
         [Authorize]
         public ActionResult Index(int? userId)
         {
+            ViewBag.shows = db.Shows.ToList();
+
             if (userId == null)
                 return RedirectToAction("Login", "Account");
             var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
@@ -160,6 +162,16 @@ namespace DogsSocialNetwork.Controllers
 
         #endregion
 
+        #region Breeder
+
+        public ActionResult BreederInfo (int breederId)
+        {
+            var breeder = db.Breeders.Where(b => b.Id == breederId).FirstOrDefault();
+            return View(breeder);
+        }
+
+        #endregion
+
         #region PairSearch
 
         public ActionResult PairSearch(int petId)
@@ -199,11 +211,13 @@ namespace DogsSocialNetwork.Controllers
         {
             var breeds = db.Breeds.Select(x => x).ToList();
             ViewBag.breeds = GetBreedsList();
+            ViewBag.breeders = GetBreedersList();
             ViewBag.UserId = userId;
             ViewBag.genders = GetGendersList();
             return View();
         }
 
+        
         [Authorize]
         [HttpPost]
         public ActionResult Create(Pet pet)
@@ -230,7 +244,8 @@ namespace DogsSocialNetwork.Controllers
             var petToEdit = db.Pets.Where(x => x.Id == petId).Select(x => x).FirstOrDefault();
             ViewBag.breeds = GetBreedsList();
             ViewBag.UserId = petToEdit.UserId;
-
+            ViewBag.breeders = GetBreedersList();
+            ViewBag.genders = GetGendersList();
             return View(petToEdit);
         }
         [Authorize]
@@ -241,15 +256,26 @@ namespace DogsSocialNetwork.Controllers
             if (res != null)
             {
                 res.Name = pet.Name;
-                res.Gender = pet.Gender;
+                res.GenderId = pet.GenderId;
                 res.BreedId = pet.BreedId;
                 res.Age = pet.Age;
+                res.BreederId = pet.BreederId;
 
                 db.SaveChanges();
             }
             return RedirectToAction("Pets", "Home", new { userId = res.UserId });
         }
 
+
+        #endregion
+
+        #region Shows
+
+        public ActionResult Shows()
+        {
+            var shows = db.Shows.Where(x => x.Date >= DateTime.Now).ToList();
+            return View(shows);
+        }
 
         #endregion
 
@@ -331,6 +357,22 @@ namespace DogsSocialNetwork.Controllers
             return res;
         }
 
+        private List<SelectListItem> GetBreedersList()
+        {
+            var res = new List<SelectListItem>();
+            res.Add(new SelectListItem());
+
+            foreach (var breeder in db.Breeders.Select(x => x).ToList())
+            {
+                res.Add(new SelectListItem()
+                {
+                    Text = $"{breeder.FirstName} {breeder.LastName}" ,
+                    Value = breeder.Id.ToString()
+                });
+            }
+            return res;
+        }
+
         private List<SelectListItem> GetPetMaleList(int petId)
         {
             var res = new List<SelectListItem>();
@@ -363,5 +405,6 @@ namespace DogsSocialNetwork.Controllers
             return res;
         }
         #endregion
+
     }
 }

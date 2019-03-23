@@ -19,6 +19,8 @@ namespace DogsSocialNetwork.Helpers
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Ancestry> Ancestries { get; set; }
+        public DbSet<Breeder> Breeders { get; set; }
+        public DbSet<Show> Shows { get; set; }
 
     }
 }

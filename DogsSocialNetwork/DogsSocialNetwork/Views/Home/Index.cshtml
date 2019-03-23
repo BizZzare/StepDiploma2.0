@@ -9,10 +9,16 @@
 <div>
     Hello @Model.FirstName @Model.LastName!
 </div>
-<div >
+<div>
     @Html.ActionLink("Pets", "Pets", new { userId = Model.Id })
 </div>
 
-<div >
+<div>
     @Html.ActionLink("Chat", "Index", "Chat", new { user = $"{Model.FirstName} {Model.LastName}", logOn = true }, null)
+</div>
+<div>
+    @Html.ActionLink("Help the project", "Index", "Payment", new { userId = Model.Id }, null)
+</div>
+<div>
+    @Html.ActionLink("Upcoming dog shows", "Shows")
 </div>

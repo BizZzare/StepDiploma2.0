@@ -156,20 +156,26 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccountContext.cs" />
+    <Compile Include="Helpers\LiqPayHelper.cs" />
     <Compile Include="Helpers\PetooDbInitializer.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Ancestry.cs" />
     <Compile Include="Models\Breed.cs" />
+    <Compile Include="Models\Breeder.cs" />
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\LiqPayCheckout.cs" />
+    <Compile Include="Models\LiqPayCheckoutFormModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Show.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomMembershipProvider.cs" />
@@ -237,6 +243,11 @@
     <Content Include="Views\Home\Ancestry.cshtml" />
     <Content Include="Views\Home\AncestryDetails.cshtml" />
     <Content Include="Views\Home\PetInfo.cshtml" />
+    <Content Include="Views\Home\BreederInfo.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Shared\_Success.cshtml" />
+    <Content Include="Views\Payment\Thanks.cshtml" />
+    <Content Include="Views\Home\Shows.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

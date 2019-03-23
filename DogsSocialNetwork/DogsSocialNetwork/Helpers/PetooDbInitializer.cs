@@ -18,18 +18,24 @@ namespace DogsSocialNetwork.Helpers
 
             var admin = new Role { Id = 1, Name = "Admin" };
             var user = new Role { Id = 2, Name = "User" };
-            context.Roles.AddRange(new List<Role> { admin, user });
+            var breeder = new Role { Id = 3, Name = "Breeder" };
+            context.Roles.AddRange(new List<Role> { admin, user, breeder });
 
             var regLogin = new Login { Password = "regular", UserLogin = "regular" };
             var reg2Login = new Login { Password = "regular2", UserLogin = "regular2" };
+            var breedLogin = new Login { Password = "breeder", UserLogin = "breeder" };
             var admLogin = new Login { Password = "admin", UserLogin = "admin" };
-            context.Logins.AddRange(new List<Login> { regLogin, admLogin, reg2Login });
+            context.Logins.AddRange(new List<Login> { regLogin, admLogin, reg2Login, breedLogin });
 
             var regularUser = new User() { Id = 1, FirstName = "Reqular", LastName = "User", Login = regLogin, Role = user, Email = "reg@reg.com" };
             var regular2 = new User() { Id = 2, FirstName = "Reqular2", LastName = "User2", Login = reg2Login, Role = user, Email = "reg2@reg.com" };
             var adminUser = new User() { Id = 3, FirstName = "Admin", LastName = "Administrator", Login = admLogin, Role = admin };
             context.Users.AddRange(new List<User> { regularUser, adminUser, regular2 });
-            
+
+            context.Breeders.Add(new Breeder { Id = 1, FirstName = "Breeder", LastName = "Breeder", Email = "breed@gmail.com", Login = breedLogin, Role = breeder, WebSite = "http://designbyis.com/" });
+
+            context.Shows.AddRange(ShowsList());
+
             context.Breeds.AddRange(FullBreedsList());
 
             context.Pets.AddRange(LotOfPetsList());
@@ -41,6 +47,8 @@ namespace DogsSocialNetwork.Helpers
             lst.Add(new Ancestry { Id = 3, FatherId = 10, MotherId = 20, DocumentPath = filePath });
             lst.Add(new Ancestry { Id = 4, FatherId = 12, MotherId = 22, DocumentPath = filePath });
             context.Ancestries.AddRange(lst);
+
+
             //var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedFiles", "1.jpg");
             //var pet = new Pet { BreedId = 223, Name = "Archie", User = regularUser, Age = 3, Gender = male, ImagePath = filePath };
 
@@ -602,7 +610,7 @@ namespace DogsSocialNetwork.Helpers
             var lst = new List<Pet>();
 
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedFiles", "1.jpg");
-            lst.Add(new Pet { Id = 1, BreedId = 223, Name = "Archie", UserId = 1, Age = 3, GenderId = 1, ImagePath = filePath, AncestryId = 1});
+            lst.Add(new Pet { Id = 1, BreedId = 223, Name = "Archie", UserId = 1, Age = 3, GenderId = 1, ImagePath = filePath, AncestryId = 1, BreederId = 1 });
             lst.Add(new Pet { Id = 2, BreedId = 223, Name = "Bailey", UserId = 1, Age = 4, GenderId = 1, ImagePath = filePath });
             lst.Add(new Pet { Id = 3, BreedId = 223, Name = "George", UserId = 1, Age = 5, GenderId = 1, ImagePath = filePath });
             lst.Add(new Pet { Id = 4, BreedId = 223, Name = "Gus", UserId = 1, Age = 6, GenderId = 1, ImagePath = filePath });
@@ -630,6 +638,66 @@ namespace DogsSocialNetwork.Helpers
             lst.Add(new Pet { Id = 20, BreedId = 223, Name = "Eva", UserId = 2, Age = 5, GenderId = 2, ImagePath = filePath });
             lst.Add(new Pet { Id = 21, BreedId = 223, Name = "Goldie", UserId = 2, Age = 6, GenderId = 2, ImagePath = filePath });
             lst.Add(new Pet { Id = 22, BreedId = 223, Name = "Jessie", UserId = 2, Age = 7, GenderId = 2, ImagePath = filePath });
+
+            return lst;
+        }
+
+        private List<Show> ShowsList()
+        {
+            var lst = new List<Show>();
+
+            lst.Add(new Show()
+            {
+                Id = 1,
+                Name = "Kharkiv Winter Cup 2019",
+                Date = DateTime.Parse("26.01.2019"),
+                City = "Kharkiv",
+                Country = "Ukraine",
+                Duration = 2,
+                Sponsor = "Харківський МО «Природа», ВГО «КСУ»",
+                ContactEmail = "Kharkovpriroda@ukr.net",
+                ContactPhone = "057 705 17 98"
+            });
+
+            lst.Add(new Show()
+            {
+                Id = 2,
+                Name = "Пам’яті Ольги Низової",
+                Date = DateTime.Parse("26.01.2019"),
+                City = "Lviv",
+                Country = "Ukraine",
+                Duration = 2,
+                Sponsor = "Львівський МО, «ЛВ Фортуна», ВГО «КСУ»",
+                ContactEmail = "ksulviv.fortuna@gmail.com",
+                ContactPhone = "+38 (032) 238-09-84"
+            });
+
+            lst.Add(new Show()
+            {
+                Id = 3,
+                Name = "САС",
+                Date = DateTime.Parse("04.05.2019"),
+                City = "Kharkiv",
+                Country = "Ukraine",
+                Duration = 2,
+                Sponsor = "Харківський РО ВГО «КСУ» в Харківській області, «Союз - Віват»",
+                ContactEmail = "souzvivat@i.ua",
+                ContactPhone = "+38 (057) 757-26-27"
+            });
+
+            lst.Add(new Show()
+            {
+                Id = 4,
+                Name = "FCI-CACIB",
+                Date = DateTime.Parse("11.05.2019"),
+                City = "Mariupil",
+                Country = "Ukraine",
+                Duration = 1,
+                Sponsor = "Маріупольський МО ВГО «КСУ», «Кінологічний центр Азов»",
+                ContactEmail = "moksuazov@gmail.com",
+                ContactPhone = "+38 (050) 656-08-48"
+            });
+
 
             return lst;
         }

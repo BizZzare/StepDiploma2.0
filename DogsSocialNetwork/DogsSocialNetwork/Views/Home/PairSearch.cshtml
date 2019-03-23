@@ -33,7 +33,7 @@
             @Html.DisplayFor(model => model.Age)
         </dd>
 
-       
+
 
         @if (Model.AncestryId != null)
         {
@@ -43,6 +43,17 @@
 
             <dd>
                 @Html.ActionLink("Ancestry", "AncestryDetails", new { petId = Model.Id })
+            </dd>
+        }
+
+        @if (Model.BreederId != null)
+        {
+            <dt>
+                Breeder Info
+            </dt>
+
+            <dd>
+                @Html.ActionLink("Breeder", "BreederInfo", new { breederId = Model.BreederId })
             </dd>
         }
 

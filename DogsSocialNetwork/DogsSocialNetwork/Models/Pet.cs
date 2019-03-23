@@ -20,6 +20,7 @@ namespace DogsSocialNetwork.Models
         public Gender Gender { get; set; }
 
         [Required]
+        [Range(0, Int32.MaxValue)]
         public int Age { get; set; }
 
         [Display(Name = "Breed")]
@@ -27,6 +28,7 @@ namespace DogsSocialNetwork.Models
         public int BreedId { get; set; }
         public Breed Breed { get; set; }
 
+        [Display(Name = "User")]
         [ForeignKey("User")]
         public int? UserId { get; set; }
         public User User { get; set; }
@@ -35,7 +37,18 @@ namespace DogsSocialNetwork.Models
         public int? AncestryId { get; set; }
         public Ancestry Ancestry { get; set; }
 
+        [ForeignKey("Breeder")]
+        public int? BreederId { get; set; }
+        public Breeder Breeder { get; set; }
+
         [Display(Name = "Attach Image")]
         public string ImagePath { get; set; }
+        
+        public virtual ICollection<Show> Shows { get; set; }
+
+        public Pet()
+        {
+            Shows = new List<Show>();
+        }
     }
 }
