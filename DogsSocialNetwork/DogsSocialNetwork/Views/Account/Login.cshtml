@@ -6,11 +6,7 @@
 
 <h2>Login</h2>
 
-<div class="row">
-    <div class="col-sm-12" style="text-align:center">
-        <h2>Enter</h2>
-    </div>
-</div>
+
 <div class="row">
     <div class="col-sm-12" style="text-align:center">
         <p class="lead">Please, log in your account:</p>
@@ -48,7 +44,7 @@
         </div>
     }
 
-        <div>
-            @Html.ActionLink("Register", "Register")
+        <div style="position: absolute; right: 200px; top: 100px;">
+            @Html.ActionLink("Register", "Register", null, new { @class = "btn btn-primary" })
         </div>
 </div>

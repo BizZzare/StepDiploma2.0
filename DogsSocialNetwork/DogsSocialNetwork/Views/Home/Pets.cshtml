@@ -28,35 +28,45 @@
             @Html.DisplayNameFor(model => model.Age)
         </th>
         <th></th>
+        
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.ActionLink("Find a pair", "PairSearch", new { petId = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Ancestry", "Ancestry", new { petId = item.Id })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Breed.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.ActionLink("Set picture", "Upload", new { petId = item.Id }) |
-            @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { petId = item.Id }, new { @class = "btnDelete" })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Find a pair", "PairSearch", new { petId = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Ancestry", "Ancestry", new { petId = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed.Name)
+            </td>
+            <td>
+                @if (!String.IsNullOrEmpty(item.ImagePath))
+                {
+                    <div style="display: inline-block">
+                        <img src="@Url.Action("GetImage", "Home", new { path = item.ImagePath })" alt="@item.Name" class="petImage" style="width: 25px; height: 25px;" />
+                    </div>
+                }
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Gender.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+
+                @Html.ActionLink("Set picture", "Upload", new { petId = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { petId = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { petId = item.Id }, new { @class = "btnDelete" })
+            </td>
+          
+        </tr>
     }
 
 </table>

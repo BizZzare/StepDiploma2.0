@@ -4,21 +4,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Hello @Model.FirstName @Model.LastName!</h2>
 
-<div>
-    Hello @Model.FirstName @Model.LastName!
-</div>
-<div>
-    @Html.ActionLink("Pets", "Pets", new { userId = Model.Id })
-</div>
+<div class="main-buttons col-md-4">
+    <div>
+        @Html.ActionLink("Pets", "Pets", new { userId = Model.Id }, new { @class = "btn btn-primary" })
+    </div>
+    <div>
+        @Html.ActionLink("Chat", "Index", "Chat", new { user = $"{Model.FirstName} {Model.LastName}", logOn = true }, new { @class = "btn btn-primary" })
+    </div>
+    <div>
+        @Html.ActionLink("Upcoming dog shows", "Shows", null, new { @class = "btn btn-primary" })
+    </div>
+    <div>
+        @Html.ActionLink("Help the project", "Index", "Payment", new { userId = Model.Id }, new { @class = "btn btn-primary" })
+    </div>
+    <div>
+        @Html.ActionLink("Log out", "Logout", "Account", null, new { @class = "btn btn-danger" })
+    </div>
 
-<div>
-    @Html.ActionLink("Chat", "Index", "Chat", new { user = $"{Model.FirstName} {Model.LastName}", logOn = true }, null)
 </div>
-<div>
-    @Html.ActionLink("Help the project", "Index", "Payment", new { userId = Model.Id }, null)
-</div>
-<div>
-    @Html.ActionLink("Upcoming dog shows", "Shows")
+<div class="col-md-8">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet enim tortor at auctor urna nunc id cursus. Facilisis magna etiam tempor orci. Turpis egestas integer eget aliquet. Proin fermentum leo vel orci porta non pulvinar neque laoreet. Morbi non arcu risus quis. Elementum tempus egestas sed sed risus pretium quam. Commodo quis imperdiet massa tincidunt nunc pulvinar. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Neque ornare aenean euismod elementum. Elementum nibh tellus molestie nunc non blandit massa. Eget mi proin sed libero enim sed faucibus. Commodo odio aenean sed adipiscing diam donec. Urna neque viverra justo nec ultrices dui. Cursus metus aliquam eleifend mi in nulla. Erat nam at lectus urna duis convallis convallis tellus.
+    </p><p>
+        Ante in nibh mauris cursus mattis molestie a iaculis at. Molestie nunc non blandit massa enim nec dui nunc mattis. Sed egestas egestas fringilla phasellus. Elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet. Fermentum leo vel orci porta. Quam nulla porttitor massa id neque aliquam vestibulum morbi. Venenatis a condimentum vitae sapien pellentesque habitant. Convallis tellus id interdum velit laoreet. Sed velit dignissim sodales ut.
+    </p><p>
+        Tellus orci ac auctor augue mauris augue. Convallis aenean et tortor at risus. Nec feugiat in fermentum posuere urna nec. Sed odio morbi quis commodo odio aenean sed. Sagittis vitae et leo duis ut diam quam nulla. Nibh tortor id aliquet lectus proin nibh nisl condimentum. In mollis nunc sed id semper risus. Turpis in eu mi bibendum neque egestas. Nunc pulvinar sapien et ligula ullamcorper malesuada proin libero. Ullamcorper malesuada proin libero nunc. Porttitor rhoncus dolor purus non enim praesent elementum. Egestas sed sed risus pretium quam vulputate. Quisque non tellus orci ac auctor augue. Integer eget aliquet nibh praesent tristique magna sit. Morbi tristique senectus et netus et malesuada fames ac turpis.
+    </p>
 </div>

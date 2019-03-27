@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.main-buttons div {
+    margin: 10px;
+}
+
+    .main-buttons div a {
+        width: 300px;
+    }
